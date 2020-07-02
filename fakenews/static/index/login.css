@@ -1,0 +1,125 @@
+:root {
+  --clr-black:black;
+  --transition: all 0.3s linear;
+  --spacing: 0.25rem;
+  --radius: 0.5rem;
+    --clr-white: white;
+  }
+
+body{
+background-image: url("new2.jpg");
+background-size: cover;
+}
+img{
+padding-right: 0px;
+opacity: 1.0;
+border-color: white;
+border-style: double;
+}
+.form-control{
+width: 55%;
+}
+.content {
+  position: fixed;
+  bottom: 0;
+  background: white;
+  width: 100%;
+  padding: 20px;
+}
+
+#logtext{
+font-size: 25px;
+font-family: Poppins-Bold;
+color:white;
+}
+
+.form{
+align-self: center;
+padding-bottom: 50px;
+padding-top: 50px;
+width: 450px;
+height:800px;
+background-color:black ;
+opacity: 0.7;
+font-family: 'Tenali Ramakrishna', sans-serif;
+font-size: 25px;
+}
+
+.caption {
+    display: block;
+}
+
+body {
+  margin: 0;
+
+}
+
+pre{
+  font-family: 'Tenali Ramakrishna', sans-serif;
+  color: black;
+}
+
+
+h1{
+  margin-left: 45px;
+  margin-top: 50px;
+  color: #616161;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 60px;
+  text-decoration: underline;
+}
+
+.form-group{
+font-size: 30px;
+}
+
+textarea:focus, input:focus {
+  border-color: transparent !important;
+}
+
+.btn{
+height: 55px;
+color: black;
+background-color: white;
+padding: 7px 17px;
+border: 2px solid white;
+border-radius: 8px;
+font-size: 30px;
+text-align: center;
+padding-bottom: 3px;
+transition-duration: 0.4s;
+cursor: pointer;
+}
+
+.btn:hover{
+background-color: black;
+border: 3px solid white;
+color: white;
+}
+
+.form-group {
+  width: 100%;
+  position: relative;
+  margin-bottom: 37px;
+
+}
+
+.txt1 {
+  font-family: Poppins-Regular;
+  font-size: 20px;
+  color: lightblue;
+  line-height: 1.5;
+}
+
+.txt2 {
+  font-family: Poppins-Regular;
+  font-size: 20px;
+  color: white;
+  line-height: 1.5;
+}
+
+
+#container1{
+  margin-top: 135px;
+  align-content: center;
+}
