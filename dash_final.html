@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Main</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="dash_final.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <style>
+
+    .btn{
+    color: white;
+    background-color: #3a4750;
+    padding: 7px 17px;
+    border: 1px solid white;
+    border-radius: 50px;
+    font-size: 15px;
+    text-align: center;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width: 100px;
+    height: 80px;
+    }
+
+    .btn:hover{
+    border: 1px solid #0a91ab;
+    color: white;
+    }
+
+    body{
+      background-color: #303841;
+    }
+
+      .vl {
+        border-left: 3px dotted black;
+        height: 743px;
+        position: absolute;
+        top: 0;
+      }
+      #vl1 {
+        left: 50%;
+      }
+      * {
+        box-sizing: border-box;
+      }
+
+      /* Create three equal columns that floats next to each other */
+      .column {
+        float: left;
+        width: 50%;
+        padding: 10px; /* Should be removed. Only for demonstration */
+        height: 600px;
+      }
+
+      /* Clear floats after the columns */
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+<script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+<script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+<link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
+<link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
+  </head>
+  <body>
+    <br>
+    <h1 id="heading" align="center">FAKE NEWS DETECTOR</h1>
+
+    <br>
+        <div class="container">
+          <div class="card-columns d-flex justify-content-center">
+            <div class="card" style="width: 350px;" id="card">
+              <div class="card-block">
+                <h4 class="card-title">Accuracy</h4>
+                <p class="card-text">The accuracy of this model is 99.2%</p>
+              </div>
+            </div>
+            <div class="card" style="width: 350px;" id="card">
+            <div class="card-block">
+                <h4 class="card-title">Training and Validation</h4>
+                <p class="card-text">For training and validation of this model, around 4.5 lakh news articles have been used.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+    <div class="row">
+      <div class="column" id="column1" align="center">
+        <form id="formElem" action="#" onsubmit="myfunc()">
+
+          <br>
+          <textarea
+            id="title"
+            rows="6"
+            cols="70"
+            placeholder="Enter headline here:"
+            style="border: none"
+          ></textarea>
+          <br>
+          <br>
+          <br>
+          <br>
+          <textarea
+            id="text"
+            rows="10"
+            cols="70"
+            placeholder="Enter content here:"
+            style="border: none"
+          ></textarea>
+          <br>
+          <br>
+
+          <!-- <input type="submit" value="Generate output!" /> -->
+          <button type="submit" class="btn" id="submit">Generate Output</button>
+        </form>
+
+      </div>
+      <div class="column">
+        <form action="#">
+          <canvas id="myChart" ></canvas>
+          <div id="op"></div>
+          <br />
+        </form>
+
+    </div>
+
+
+    <script>
+
+
+    var F=0;
+    var T=0;
+    var count=0;
+
+
+    async function myfunc() {
+        //e.preventDefault();
+    let title = document.getElementById("title").value;
+    let text = document.getElementById("text").value;
+    const ul=document.getElementById("op");
+    console.log(title);
+    console.log(text);
+    var formData = new FormData();
+    formData.append('title',title);
+    formData.append('text', text);
+
+        let response = await fetch('http://aa6c3e8e52ef.ngrok.io/predict', {
+          method: 'POST',
+          body:formData
+        });
+
+
+        let result = await response.json();
+        console.log(result)
+        const {Fake,True}=result;
+        F=Fake;
+        T=True;
+        console.log(Fake)
+        console.log(True)
+
+                    chartIt();
+    };
+    async function chartIt(){
+
+      if(count==0){
+              await myfunc();
+              count=count+1;
+
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+        ctx.canvas.width = 1600;
+        ctx.canvas.height = 900;
+        const myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Fake', 'True',],
+                datasets: [{
+                    data: [F,T,],
+                    backgroundColor: [
+                        '#0a91ab',
+                        '#ffc045',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+        });
+
+      }
+    }
+
+
+    </script>
+  </body>
+</html>
