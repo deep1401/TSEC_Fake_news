@@ -10,7 +10,7 @@ cymem==2.0.3
 fastai==1.0.61
 fastprogress==0.2.3
 Flask==1.1.2
-Flask-Cors==3.0.8
+Flask-Cors==3.0.9
 future==0.18.2
 idna==2.10
 importlib-metadata==1.7.0
